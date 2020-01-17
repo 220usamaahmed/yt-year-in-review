@@ -19,12 +19,11 @@ def get_frequencies_over_time(records, search_terms, per_n_days=1):
 	first_record = next(records)
 	current_timestamps = {search_term: first_record[2] for search_term in search_terms} 
 
-
 	for search_term in frequencies:
 		if contains(search_term, first_record[0]) or contains(search_term, first_record[1]):
 			frequencies[search_term] = [1]
 
-	for title, channel, timestamp in records:
+	for _, title, channel, timestamp in records:
 		for search_term in frequencies:
 			if timestamp == current_timestamps[search_term]:
 				if contains(search_term, title) or contains(search_term, channel):

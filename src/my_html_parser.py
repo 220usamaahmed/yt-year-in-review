@@ -10,12 +10,12 @@ class MyHTMLParser(HTMLParser):
 		def __init__(self, tag=None, parent=None, classes=[], children=[]):
 			self.tag = tag
 			self.parent = parent
-			self.classes = []
+			self.attributes = {}
 			self.children = []
 			self.data = []
 
 		def __repr__(self):
-			return f"{self.tag} ({' '.join(self.classes)})"
+			return self.tag
 
 
 	def __init__(self, filepath):
@@ -47,7 +47,7 @@ class MyHTMLParser(HTMLParser):
 		new_node.tag = tag
 		new_node.parent = self.current_node
 		for attr in attrs:
-			if attr[0] == "class": new_node.classes = attr[1].split(' ')
+			new_node.attributes[attr[0]] = attr[1]
 		self.current_node.children.append(new_node)
 		self.current_node = new_node
 
@@ -56,13 +56,14 @@ class MyHTMLParser(HTMLParser):
 
 		self.current_node = self.current_node.parent
 
-		if "outer-cell" in self.current_node.classes:
+		if "class" in self.current_node.attributes and "outer-cell" in self.current_node.attributes["class"]:
 			details = self.current_node.children[0].children[1]
 
 			# Video watch history details have exactly 2 children
 			# Ignoring anything else like stories watched
 			if len(details.children) != 2: return
 
+			video_id = details.children[0].attributes["href"].split("=")[1]
 			video_title = details.children[0].data[0]
 			video_channel = details.children[1].data[0]
 			video_date = details.data[-1]
@@ -71,7 +72,7 @@ class MyHTMLParser(HTMLParser):
 			video_date = video_date[:video_date.rfind(',')]
 			timestamp = time.mktime(datetime.datetime.strptime(video_date, "%b %d, %Y").timetuple())
 
-			self.records.append((video_title, video_channel, timestamp))
+			self.records.append((video_id, video_title, video_channel, timestamp))
 
 	def handle_data(self, data):
 		if self.data_added_last: self.current_node.data[-1] += data
@@ -90,10 +91,6 @@ class MyHTMLParser(HTMLParser):
 		print_node(self.current_node)
 
 	def get_records(self):
-		# Clearing records for next batch to be fed
-		# temp = self.records
-		# self.records = []
-		# return temp
 
 		BUFFER_SIZE = 4 * 2**20 # 4MB
 
@@ -108,3 +105,19 @@ class MyHTMLParser(HTMLParser):
 					yield record
 
 				self.records = []
+
+
+def main():
+	parser = MyHTMLParser("D:/yt-year-in-review/dataset/watch-history.html")
+	
+	csv_file = open("D:/yt-year-in-review/dataset/watch-history.csv", 'w', encoding="utf-8")
+
+	for video_id, video_title, video_channel, video_date in parser.get_records():
+		print(video_id)
+		csv_file.write(f"{video_id},{video_title},{video_channel},{video_date}\n")
+
+	csv_file.close()
+
+
+if __name__ == '__main__':
+	main()

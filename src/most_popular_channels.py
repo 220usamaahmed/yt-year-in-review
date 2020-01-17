@@ -9,7 +9,7 @@ def get_channel_view_counts(records, ordered=True, n=None):
 	
 	view_counter = {}
 
-	for _, channel, _ in records:
+	for _, _, channel, _ in records:
 		if len(channel) > 24: channel = channel[:24] + "..."
 		if channel == "Favorite Videos": continue
 		if channel in view_counter:
