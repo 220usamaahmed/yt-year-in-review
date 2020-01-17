@@ -114,3 +114,6 @@ dmypy.json
 
 # Tests to see how to read file
 /tests
+
+# Output plots saved
+/output 

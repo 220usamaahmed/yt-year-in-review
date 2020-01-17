@@ -5,8 +5,6 @@ import time, datetime
 
 class MyHTMLParser(HTMLParser):
 
-	BUFFER_SIZE = 2**20 # 1MB
-
 	class Node:
 
 		def __init__(self, tag=None, parent=None, classes=[], children=[]):
@@ -73,7 +71,7 @@ class MyHTMLParser(HTMLParser):
 			video_date = video_date[:video_date.rfind(',')]
 			timestamp = time.mktime(datetime.datetime.strptime(video_date, "%b %d, %Y").timetuple())
 
-			self.records.append((video_title, video_channel, video_date))
+			self.records.append((video_title, video_channel, timestamp))
 
 	def handle_data(self, data):
 		if self.data_added_last: self.current_node.data[-1] += data
@@ -97,7 +95,7 @@ class MyHTMLParser(HTMLParser):
 		# self.records = []
 		# return temp
 
-		BUFFER_SIZE = 2**20 # 1MB
+		BUFFER_SIZE = 4 * 2**20 # 4MB
 
 		with open(self.filepath, 'r', encoding="utf-8") as file:
 			while True:
