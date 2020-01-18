@@ -9,9 +9,15 @@ from src import total_over_time
 
 
 def main():
-	# my_html_parser.save_to_csv(config.HISTORY_HTML_FILE, config.HISTORY_CSV_FILE)	
+
+	# Step 1
+	# my_html_parser.save_to_csv(config.HISTORY_HTML_FILE, config.HISTORY_CSV_FILE)
+	
+	# Step 2
 	# download_video_details.download_video_details(config.API_KEY, config.HISTORY_CSV_FILE, config.DETAILS_JSON_DIR)
-	# comparison_over_time.make_comparison(config.HISTORY_HTML_FILE, ["Liverpool"])
+	
+	# Statistics Examples
+	# comparison_over_time.make_comparison(config.HISTORY_HTML_FILE, ["Coldplay", "Imagine Dragons"])
 	# most_popular_channels.most_popular_channels(config.HISTORY_HTML_FILE)
 	# category_frequencies.category_frequencies(config.DETAILS_JSON_DIR)
 	# top_channels_in_category.top_channels_in_category(config.DETAILS_JSON_DIR, 24)
