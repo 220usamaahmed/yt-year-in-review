@@ -4,7 +4,7 @@ Analytics performed on YouTube history data taken from Google Takeout.
 ## How to Use
 The package provides several functions to calculate statistics based on the History Data.
 In order to utilize these functions follow the following steps:
-1. Download Youtube History Data from https://myaccount.google.com/ > Data & Personalization > Download your Data > YouTube. Make sure to download the data in HTML format.
+1. Download Youtube History Data from https://myaccount.google.com/ __>__ Data & Personalization __>__ Download your Data __>__ YouTube. Make sure to download the data in HTML format.
 2. Unzip the downloaded file and place the watch-history.html file in the dataset folder.
 3. Open *run.py* and uncomment Step 1. Run this file. This will convert the HTML file into a CSV file
 4. Register a YouTube Data API Key and paste it in the client_secret.txt file.
