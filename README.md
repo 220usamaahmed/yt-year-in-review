@@ -1,5 +1,5 @@
 # YouTube Year In Review
-Analytics performed on YouTube history data taken from Google Takeout
+Analytics performed on YouTube history data taken from Google Takeout.
 
 ## How to Use
 The package provides several functions to calculate statistics based on the History Data.
@@ -70,6 +70,7 @@ top_channels_in_category.top_channels_in_category(config.DETAILS_JSON_DIR, 24)
 | 44 | Trailer 				|
 
 5. __total_over_time__: A bar chart to compare the total number of videos watched which contain a particular key term.
+
 ```python
 total_over_time.total_over_time(config.HISTORY_HTML_FILE, ["Linear Algebra", "Calculus"])
 ```
