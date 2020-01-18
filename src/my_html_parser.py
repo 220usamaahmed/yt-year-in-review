@@ -107,17 +107,22 @@ class MyHTMLParser(HTMLParser):
 				self.records = []
 
 
-def main():
-	parser = MyHTMLParser("D:/yt-year-in-review/dataset/watch-history.html")
+def save_to_csv(html_filepath, csv_filepath):
+	"""
+	Parse HTML file taken from Google Takeout and save its
+	content in a csv file
+
+	Args:
+		html_filepath: filepath of the raw data taken from Google Takeout
+		csv_filepath: filepath of the csv file in which to save the data
+	"""
+
+	parser = MyHTMLParser(html_filepath)
 	
-	csv_file = open("D:/yt-year-in-review/dataset/watch-history.csv", 'w', encoding="utf-8")
+	csv_file = open(csv_filepath, 'w', encoding="utf-8")
 
 	for video_id, video_title, video_channel, video_date in parser.get_records():
 		print(video_id)
 		csv_file.write(f"{video_id},{video_title},{video_channel},{video_date}\n")
 
 	csv_file.close()
-
-
-if __name__ == '__main__':
-	main()

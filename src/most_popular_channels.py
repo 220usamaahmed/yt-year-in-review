@@ -1,4 +1,4 @@
-from my_html_parser import MyHTMLParser
+from src.my_html_parser import MyHTMLParser
 import matplotlib.pyplot as plt
 
 
@@ -21,10 +21,8 @@ def get_channel_view_counts(records, ordered=True, n=None):
 	else: return view_counter
 
 
-def main():
-	parser = MyHTMLParser("D:/yt-year-in-review/dataset/watch-history.html")
-	# parser = MyHTMLParser("D:/yt-year-in-review/dataset/watch-history-small.html")
-	# parser = MyHTMLParser("D:/yt-year-in-review/dataset/watch-history-bilal.html")
+def most_popular_channels(history_html_file):
+	parser = MyHTMLParser(history_html_file)
 	records = parser.get_records()
 
 	channel_view_counts = get_channel_view_counts(records, n=25)
@@ -34,10 +32,6 @@ def main():
 	plt.barh(range(len(channel_view_counts)), list(channel_view_counts.values()), color=(255/255, 52/255, 100/255))
 	plt.yticks(range(len(channel_view_counts)), list(channel_view_counts.keys()), color=(0.32, 0.32, 0.32))
 	plt.gca().invert_yaxis()
-	plt.suptitle("Top 25 YouTube Channels", fontsize=36, color=(0.16, 0.16, 0.16), x=0.295)
-	plt.title("Apr 5, 2018 to Jan 15, 2020\n", fontsize=18, color=(0.24, 0.24, 0.24), loc="left")
+	plt.suptitle("Top 25 YouTube Channels", fontsize=36, color=(0.16, 0.16, 0.16))
 	plt.xlabel("Nonconsecutive Views of One Video", fontsize=16, color=(0.24, 0.24, 0.24))
 	plt.show()
-
-if __name__ == '__main__':
-	main()

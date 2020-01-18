@@ -46,9 +46,9 @@ categories = {
 frequencies = {}
 
 
-def count_frequency(filename):
+def count_frequency(filepath):
 	# Forgot to actually save files as json while downloading so have to specify encoding
-	with open(os.path.join(JSON_DUMP_DIR, filename), 'r', encoding="utf-8") as json_file:
+	with open(filepath, 'r', encoding="utf-8") as json_file:
 		records = json.load(json_file)["items"]
 		
 		for record in records:
@@ -59,14 +59,14 @@ def count_frequency(filename):
 				frequencies[category_id] = 1
 
 
-def main():
+def category_frequencies(details_json_dir):
 
 	global frequencies
 
-	for filename in os.listdir(JSON_DUMP_DIR):
+	for filename in os.listdir(details_json_dir):
 		print(f"Processing file {filename}")
 
-		count_frequency(filename)
+		count_frequency(os.path.join(details_json_dir, filename))
 		
 	frequencies = {categories[k]: v for k, v in sorted(frequencies.items(), key=lambda item: item[1], reverse=True)}
 	print(frequencies)
@@ -74,12 +74,6 @@ def main():
 	plt.barh(range(len(frequencies)), list(frequencies.values()), color=(255/255, 52/255, 100/255))
 	plt.yticks(range(len(frequencies)), list(frequencies.keys()), color=(0.32, 0.32, 0.32))
 	plt.gca().invert_yaxis()
-	plt.suptitle("Categories Ranked", fontsize=36, color=(0.16, 0.16, 0.16), x=0.248)
-	plt.title("Apr 5, 2018 to Jan 15, 2020\n", fontsize=18, color=(0.24, 0.24, 0.24), loc="left")
+	plt.suptitle("Categories Ranked", fontsize=36, color=(0.16, 0.16, 0.16))
 	plt.xlabel("Nonconsecutive Views of One Video", fontsize=16, color=(0.24, 0.24, 0.24))
 	plt.show()
-
-
-if __name__ == '__main__':
-	main()
-
