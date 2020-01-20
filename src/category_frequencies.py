@@ -1,6 +1,7 @@
 import os
 import json
 import matplotlib.pyplot as plt
+import config
 
 
 plt.style.use("ggplot")
@@ -59,14 +60,14 @@ def count_frequency(filepath):
 				frequencies[category_id] = 1
 
 
-def category_frequencies(details_json_dir):
+def category_frequencies():
 
 	global frequencies
 
-	for filename in os.listdir(details_json_dir):
+	for filename in os.listdir(config.DETAILS_JSON_DIR):
 		print(f"Processing file {filename}")
 
-		count_frequency(os.path.join(details_json_dir, filename))
+		count_frequency(os.path.join(config.DETAILS_JSON_DIR, filename))
 		
 	frequencies = {categories[k]: v for k, v in sorted(frequencies.items(), key=lambda item: item[1], reverse=True)}
 	print(frequencies)

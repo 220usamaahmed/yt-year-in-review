@@ -1,6 +1,7 @@
 import datetime
 import matplotlib.pyplot as plt
 from src.my_html_parser import MyHTMLParser
+import config
 
 
 plt.style.use("ggplot")
@@ -47,11 +48,11 @@ def get_frequencies_over_time(records, search_terms, per_n_days=1):
 	return first_timestamp, last_timestamp, frequencies
 
 
-def make_comparison(history_html_file, search_terms, over_n_days=7):
+def make_comparison(search_terms, over_n_days=7):
 	
 	if not search_terms: return
 
-	parser = MyHTMLParser(history_html_file)
+	parser = MyHTMLParser(config.HISTORY_HTML_FILE)
 	records = parser.get_records()
 
 	first_timestamp, last_timestamp, frequencies = get_frequencies_over_time(records, search_terms, over_n_days)

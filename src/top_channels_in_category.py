@@ -1,9 +1,8 @@
 import os
 import json
 import matplotlib.pyplot as plt
+import config
 
-
-JSON_DUMP_DIR = "D:/yt-year-in-review/dataset/details/"
 
 """
 2:  Autos & Vehicles
@@ -61,14 +60,14 @@ def find_channels(filepath, category_filter):
 					channels[channel_title] = 1
 
 
-def top_channels_in_category(details_json_dir, category_id):
+def top_channels_in_category(category_id):
 
 	global channels
 
-	for filename in os.listdir(details_json_dir):
+	for filename in os.listdir(config.DETAILS_JSON_DIR):
 		print(f"Processing file {filename}")
 
-		find_channels(os.path.join(details_json_dir, filename), category_id)
+		find_channels(os.path.join(config.DETAILS_JSON_DIR, filename), category_id)
 
 	channels = {k: v for k, v in sorted(channels.items(), key=lambda item: item[1], reverse=True)[:25]}
 	

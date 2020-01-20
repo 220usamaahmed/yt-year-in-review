@@ -21,8 +21,8 @@ def get_channel_view_counts(records, ordered=True, n=None):
 	else: return view_counter
 
 
-def most_popular_channels(history_html_file):
-	parser = MyHTMLParser(history_html_file)
+def most_popular_channels():
+	parser = MyHTMLParser(config.HISTORY_HTML_FILE)
 	records = parser.get_records()
 
 	channel_view_counts = get_channel_view_counts(records, n=25)

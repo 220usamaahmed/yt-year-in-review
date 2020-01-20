@@ -15,24 +15,24 @@ In order to utilize these functions follow the following steps:
 ## Examples
 1. __comparison_over_time__: A plot of videos watched over time.
 ```python	
-# The second parameter is a list of search terms to compare
-comparison_over_time.make_comparison(config.HISTORY_HTML_FILE, ["Coldplay", "Imagine Dragons"])
+# The parameter is a list of search terms to compare
+comparison_over_time.make_comparison(["Coldplay", "Imagine Dragons"])
 ```
 
 2. __most_popular_channels__: A bar chart of the channel with most videos viewed.
 ```python	
-most_popular_channels.most_popular_channels(config.HISTORY_HTML_FILE)
+most_popular_channels.most_popular_channels()
 ```
 
 3. __category_frequencies__: A bar chart of different categories watched.
 ```python
-category_frequencies.category_frequencies(config.DETAILS_JSON_DIR)
+category_frequencies.category_frequencies()
 ```
 
 4. __top_channels_in_category__: A bar chart of the top channels which have published a video of a certain category.
 ```python
-# The second parameter is the category id. Pick this from the table provided below.
-top_channels_in_category.top_channels_in_category(config.DETAILS_JSON_DIR, 24)
+# The parameter is the category id. Pick this from the table provided below.
+top_channels_in_category.top_channels_in_category(24)
 ```
 | ID | Category             |
 |----|----------------------|
@@ -72,5 +72,6 @@ top_channels_in_category.top_channels_in_category(config.DETAILS_JSON_DIR, 24)
 5. __total_over_time__: A bar chart to compare the total number of videos watched which contain a particular key term.
 
 ```python
-total_over_time.total_over_time(config.HISTORY_HTML_FILE, ["Linear Algebra", "Calculus"])
+# The parameter is a list of search terms to compare
+total_over_time.total_over_time(["Linear Algebra", "Calculus"])
 ```

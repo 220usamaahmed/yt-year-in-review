@@ -1,5 +1,6 @@
 from src.my_html_parser import MyHTMLParser
 import matplotlib.pyplot as plt
+import config
 
 
 plt.style.use("ggplot")
@@ -25,8 +26,8 @@ def get_frequency(records, search_terms, ordered=True):
 	else: return view_counter
 
 
-def total_over_time(history_html_file, keywords):
-	parser = MyHTMLParser(history_html_file)
+def total_over_time(keywords):
+	parser = MyHTMLParser(config.HISTORY_CONFIG_FILE)
 	records = parser.get_records()
 
 	totals = get_frequency(records, keywords)
